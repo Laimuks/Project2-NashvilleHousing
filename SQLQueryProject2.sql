@@ -1,11 +1,7 @@
 Select *
 From Portfolio.dbo.NashvilleHousing
 
----This Kaggle dataset was used strictly for data cleaning purposes; to showcase my SQL skills and ability to standardize dirty data for efficiency and ease of use. Below the steps of my data cleaning process will be outlined.
----https://www.kaggle.com/datasets/tmthyjames/nashville-housing-data
-
-
--- Standardize Date Format
+-- Changing date format
 
 SELECT SaleDate, CONVERT(Date, SaleDate) as SaleDateClean
 FROM portfolio.dbo.nashvillehousing
@@ -19,7 +15,7 @@ ADD SaleDateConverted Date;
 UPDATE nashvillehousing
 SET SaleDateConverted = CONVERT(Date, SaleDate) 
 
--- Populate Property Address data
+-- Populating Property Address data
 
 Select *
 From Portfolio.dbo.NashvilleHousing
@@ -112,7 +108,7 @@ SET OwnerSplitState = PARSENAME(REPLACE(OwnerAddress, ',', '.') , 1)
 Select *
 From Portfolio.dbo.NashvilleHousing
 
--- Change Y and N to Yes and No in "Sold as Vacant" field
+-- Changing Y and N to Yes and No in "Sold as Vacant" field
 
 
 Select Distinct(SoldAsVacant), Count(SoldAsVacant)
@@ -135,7 +131,7 @@ SET SoldAsVacant = CASE When SoldAsVacant = 'Y' THEN 'Yes'
 	   ELSE SoldAsVacant
 	   END
 
--- Remove Duplicates
+-- Removing Duplicates
 
 WITH RowNumCTE AS(
 Select *,
